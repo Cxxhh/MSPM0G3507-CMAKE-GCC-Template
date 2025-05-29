@@ -72,7 +72,12 @@ extern "C" {
 #define POWER_STARTUP_DELAY                                                (16)
 
 
-#define CPUCLK_FREQ                                                     32000000
+#define GPIO_HFXT_PORT                                                     GPIOA
+#define GPIO_HFXIN_PIN                                             DL_GPIO_PIN_5
+#define GPIO_HFXIN_IOMUX                                         (IOMUX_PINCM10)
+#define GPIO_HFXOUT_PIN                                            DL_GPIO_PIN_6
+#define GPIO_HFXOUT_IOMUX                                        (IOMUX_PINCM11)
+#define CPUCLK_FREQ                                                     80000000
 
 
 
@@ -80,9 +85,11 @@ extern "C" {
 /* Port definition for Pin Group GPIO_LED */
 #define GPIO_LED_PORT                                                    (GPIOA)
 
-/* Defines for PIN_LED: GPIOA.14 with pinCMx 36 on package pin 7 */
+/* Defines for PIN_LED: GPIOA.14 with pinCMx 36 on package pin 29 */
 #define GPIO_LED_PIN_LED_PIN                                    (DL_GPIO_PIN_14)
 #define GPIO_LED_PIN_LED_IOMUX                                   (IOMUX_PINCM36)
+
+
 
 /* clang-format on */
 
@@ -91,6 +98,7 @@ void SYSCFG_DL_initPower(void);
 void SYSCFG_DL_GPIO_init(void);
 void SYSCFG_DL_SYSCTL_init(void);
 
+void SYSCFG_DL_SYSTICK_init(void);
 
 
 #ifdef __cplusplus

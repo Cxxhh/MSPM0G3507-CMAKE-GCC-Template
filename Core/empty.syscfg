@@ -4,6 +4,12 @@
  * @cliArgs --device "MSPM0G350X" --package "LQFP-48(PT)" --part "Default" --product "mspm0_sdk@2.01.00.03"
  * @versions {"tool":"1.20.0+3587"}
  */
+scripting.excludeFromBuild("device_linker.cmd");
+scripting.excludeFromBuild("device_linker.lds");
+scripting.excludeFromBuild("device.opt");
+scripting.excludeFromBuild("device.cmd.genlibs");
+scripting.excludeFromBuild("device.lds.genlibs");
+scripting.excludeFromBuild("Event.dot");
 
 /**
  * Import the modules used in this configuration.
@@ -11,11 +17,15 @@
 const GPIO          = scripting.addModule("/ti/driverlib/GPIO", {}, false);
 const GPIO1         = GPIO.addInstance();
 const SYSCTL        = scripting.addModule("/ti/driverlib/SYSCTL");
+const SYSTICK       = scripting.addModule("/ti/driverlib/SYSTICK");
 const ProjectConfig = scripting.addModule("/ti/project_config/ProjectConfig");
 
 /**
  * Write custom configuration values to the imported modules.
  */
+const divider6       = system.clockTree["PLL_CLK2X_DIV"];
+divider6.divideValue = 4;
+
 const divider9       = system.clockTree["UDIV"];
 divider9.divideValue = 2;
 
@@ -26,7 +36,7 @@ const mux4       = system.clockTree["EXHFMUX"];
 mux4.inputSelect = "EXHFMUX_XTAL";
 
 const mux8       = system.clockTree["HSCLKMUX"];
-mux8.inputSelect = "HSCLKMUX_SYSPLL0";
+mux8.inputSelect = "HSCLKMUX_SYSPLL2X";
 
 const mux12       = system.clockTree["SYSPLLMUX"];
 mux12.inputSelect = "zSYSPLLMUX_HFCLK";
@@ -51,5 +61,9 @@ Board.peripheral.swdioPin.$assign = "PA19";
 
 SYSCTL.forceDefaultClkConfig = true;
 SYSCTL.clockTreeEn           = true;
+
+SYSTICK.periodEnable  = true;
+SYSTICK.period        = 80;
+SYSTICK.systickEnable = true;
 
 ProjectConfig.deviceSpin = "MSPM0G3507";

@@ -108,7 +108,7 @@ probe-rs reset --chip MSPM0G3507
 
 > 记录项目的重要更新内容。
 
-### v1.0.1 - 2025-05-29
+### v1.0.2 - 2025-05-29
 - 新增 bat脚本,可在windows下使用。
 - 添加 `task.json` 文件 VS Code 任务配置,可在 VS Code 调试时自动生成 elf 文件。
 
