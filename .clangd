@@ -1,0 +1,8 @@
+CompileFlags:
+  Add: 
+    - "--target=arm-none-eabi"
+    - "-mcpu=cortex-m0plus"
+    - "-mthumb"
+    - "-IF:/Program Files (x86)/msys64/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/arm-none-eabi/include"
+    - "-IF:/Program Files (x86)/msys64/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/lib/gcc/arm-none-eabi/14.2.1/include"
+    - "-IF:/Program Files (x86)/msys64/arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi/lib/gcc/arm-none-eabi/14.2.1/include-fixed"

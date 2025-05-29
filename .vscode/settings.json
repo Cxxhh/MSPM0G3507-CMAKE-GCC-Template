@@ -1,0 +1,7 @@
+{
+    "clangd.arguments": [
+      "--query-driver=F:\\Program Files (x86)\\msys64\\arm-gnu-toolchain-14.2.rel1-mingw-w64-i686-arm-none-eabi\\bin\\arm-none-eabi-gcc.exe",  // 指定编译器路径
+      "--clang-tidy",
+      "--compile-commands-dir=${workspaceFolder}/build"
+    ]
+  }
