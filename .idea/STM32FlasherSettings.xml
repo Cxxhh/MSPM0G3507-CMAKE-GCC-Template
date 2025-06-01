@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="STM32FlasherSettings">
+    <option name="openOcdScriptsPath" value="F:\Profile\msys64\mingw64\share\openocd\scripts" />
+  </component>
+</project>
