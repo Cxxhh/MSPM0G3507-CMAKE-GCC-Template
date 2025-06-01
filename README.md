@@ -71,8 +71,8 @@ program <path_to_elf_file> verify reset
 
 - **微控制器**：MSPM0G3507
 - **构建工具链**：ARM GCC 14.x
-- **开发环境**：CLion 2023.3
-- **调试工具**：OpenOCD 0.12.0 + CMSIS-DAP
+- **开发环境**：CLion 2025.1
+- **调试工具**：OpenOCD master + CMSIS-DAP
 
 ---
 
@@ -103,5 +103,6 @@ program <path_to_elf_file> verify reset
 ---
 
 ## 🙋‍♂️ 贡献与反馈
-欢迎交流 🐧：3054736043
-欢迎提交 Issue 和 PR！如需支持其他 MSPM0 系列芯片，欢迎参与共建。
+> 欢迎交流 🐧：3054736043  
+> 欢迎提交 Issue 和 PR！  
+> 如需支持其他 MSPM0 系列芯片，欢迎参与共建。
