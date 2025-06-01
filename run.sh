@@ -14,6 +14,10 @@ echo -e "${YELLOW}🔧 开始构建工程（增量编译）...${NC}"
 mkdir -p build
 cd build
 
+echo -e "${GREEN}⚙️  运行 SysConfig 配置生成器...${NC}"
+
+# 设置路径（注意这里路径都以 run.sh 所在目录为基础）
+
 # ===== 仅首次或缺失时运行 CMake 配置 =====
 if [ ! -f "build.ninja" ]; then
     echo -e "${GREEN}🚀 生成构建文件...${NC}"
