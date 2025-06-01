@@ -1,3 +1,20 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# 1. 编辑区：把下面的路径改成你本地的实际位置
+# ─────────────────────────────────────────────────────────────────────────────
+
+# 1.1 TI MSPM SDK 根目录，示例：F:/TI/mspm0_sdk_2_01_00_03
+set(SDK_DIR "F:/TI/mspm0_sdk_2_01_00_03")
+
+# 1.2 syscfg.bat 的完整路径。如果放在工程子目录下，可以用相对路径：
+#     示例：${CMAKE_SOURCE_DIR}/tools/keil/syscfg.bat
+set(SYSCFG_SCRIPT "${CMAKE_SOURCE_DIR}/tools/keil/syscfg.bat")
+
+# 1.3 要使用的 .syscfg 文件名称（只写文件名，不要带路径），示例：empty.syscfg
+set(SYSCFG_FILE "empty.syscfg")
+
+# 1.4 项目源码所在目录，一般是 Core 目录。如果你的工程结构不一样，请改成对应路径：
+#     示例：${CMAKE_SOURCE_DIR}/Core
+set(PROJ_DIR "${CMAKE_SOURCE_DIR}/Core")
 # CMake最低版本
 cmake_minimum_required(VERSION 3.20)
 
@@ -89,21 +106,34 @@ add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
 )
 
 # --- SysConfig 生成 ----------------------------------------------------------
-file(TO_NATIVE_PATH "${CMAKE_SOURCE_DIR}/tools/keil/syscfg.bat" SYSCFG_SCRIPT)
-file(TO_NATIVE_PATH "${CMAKE_SOURCE_DIR}/Core"                 PROJ_DIR)
-# 只需要文件名即可
-set(SYSCFG_FILE "empty.syscfg")
-file(TO_NATIVE_PATH "F:/TI/mspm0_sdk_2_01_00_03"               SDK_DIR)
+# ─────────────────────────────────────────────────────────────────────────────
+# 2. 自动校验：如果填写有误，会在配置阶段就报错，避免后面找不到路径
+# ─────────────────────────────────────────────────────────────────────────────
 
-# ─── 2. 自定义目标：构建前运行 syscfg.bat ─────────────────────────────
+if(NOT EXISTS "${SDK_DIR}")
+	message(FATAL_ERROR "错误：找不到 SDK_DIR: ${SDK_DIR}\n请检查你的 SDK_DIR 路径是否正确。")
+endif()
+
+if(NOT EXISTS "${SYSCFG_SCRIPT}")
+	message(FATAL_ERROR "错误：找不到 SYSCFG_SCRIPT: ${SYSCFG_SCRIPT}\n请检查你的 syscfg.bat 路径是否正确。")
+endif()
+
+if(NOT EXISTS "${PROJ_DIR}")
+	message(FATAL_ERROR "错误：找不到 PROJ_DIR: ${PROJ_DIR}\n请检查你的 Core 目录路径是否正确。")
+endif()
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 3. 自定义 Target：在编译前先运行 syscfg.bat，生成 ti_msp_dl_config.c
+# ─────────────────────────────────────────────────────────────────────────────
+
+# run_syscfg 目标会在 “make/MyProject” 之前强制执行
 add_custom_target(run_syscfg ALL
-		# 使用分离的参数传递方式，避免引号嵌套问题
 		COMMAND "${SYSCFG_SCRIPT}" "${PROJ_DIR}" "${SYSCFG_FILE}" "${SDK_DIR}"
 		WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}"
-		COMMENT "Running TI syscfg.bat to generate ti_msp_dl_config.c"
+		COMMENT "正在运行 syscfg.bat 以生成 ti_msp_dl_config.c..."
 )
 
-# 让主可执行文件依赖这个脚本
+
 add_dependencies(${PROJECT_NAME} run_syscfg)
 # ---------------------------------------------------------------------------
 #cmd.exe /C "$P../tools/keil/syscfg.bat '$P' empty.syscfg F:\TI\mspm0_sdk_2_01_00_03"

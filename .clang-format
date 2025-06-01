@@ -1,8 +1,0 @@
-BasedOnStyle: LLVM       # 可选 Google, LLVM, WebKit, GNU, Microsoft, Mozilla
-IndentWidth: 4           # 每层缩进宽度（空格数）
-TabWidth: 4              # Tab 对齐宽度（实际显示多少个空格）
-UseTab: Never            # Never（空格） | ForIndentation（只缩进用 Tab）| Always
-BreakBeforeBraces: Allman  # 所有大括号另起一行
-ColumnLimit: 100         # 每行最大字符数（超出就换行）
-PointerAlignment: Left   # 指针星号位置（Left: `int* ptr`, Right: `int *ptr`）
-SortIncludes: false      # 是否自动排序 include 头文件
