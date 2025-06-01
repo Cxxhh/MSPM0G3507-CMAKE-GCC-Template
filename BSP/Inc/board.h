@@ -5,11 +5,7 @@
 #include "string.h"
 #include "math.h"
 
-#define MOTOR_STOP    0
-#define MOTOR_SPEED   1
-#define MOTOR_DIR  		2
-#define MOTOR_TRACK  	3
-#define MOTOR_GYRO 	  4
+
 void board_init(void);
 
 void delay_us(unsigned long __us);
