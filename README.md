@@ -6,7 +6,7 @@
 本模板适用于裸机（无 RTOS）开发，提供高效的开发体验和清晰的工程结构。
 
 > 💡尚未配置开发环境？可参考👉[STM32+Clion调试视频教程](https://www.bilibili.com/video/BV1pnjizYEAk/?spm_id_from=333.337.search-card.all.click)  
-> 🌟环境配置完成 点击进入教程篇👉[教程地址]()  
+> 🌟环境配置完成 点击进入教程篇👉[教程地址](https://github.com/Cxxhh/MSPM0G3507-CMAKE-GCC-Template/blob/Clion/Configuration.md)  
 > 🔄需要适配其他 MSPM0 系列芯片？可基于本模板裁剪移植  
  
 
@@ -17,10 +17,10 @@
 
 ```
 MSPM0-CMAKE-GCC-TEMPLATE/
-├── BSP/                    # 板级支持包（Board Support Package）
+├── BSP/                    # 第三方库文件
 ├── Core/                   # 主应用代码（如 main.c）
 ├── Driver/                 # 驱动代码，包括 CMSIS 和 TI DriverLib
-├── tools/                  # 开发工具脚本
+├── tools/                  # 开发工具脚本，生成ti_msp_dl_config.c与.h文件
 ├── cmake-build-debug-mingw-mspm0_dev/  # CLion 构建输出目录（自动生成）
 ├── flash.cfg               # OpenOCD 烧录配置文件
 ├── mspm0g3507.lds          # 链接脚本（Linker Script）
@@ -34,10 +34,12 @@ MSPM0-CMAKE-GCC-TEMPLATE/
 
 - [ARM GNU Toolchain](https://developer.arm.com/downloads/-/arm-gnu-toolchain)
 - [CMake](https://cmake.org/download/) (≥3.20)
-- [OpenOCD](https://openocd.org/) (≥0.12.0)
-- [CLion](https://www.jetbrains.com/clion/) (推荐2023.x+)
-- [Ninja](https://ninja-build.org/) (可选，用于命令行构建)
-
+- [OpenOCD](https://github.com/openocd-org/openocd) (👈自行编译)
+- [CLion 2025.1](https://www.jetbrains.com/clion/) (25.1原生支持openocd 非商业免费)
+- [Ninja](https://ninja-build.org/) (可选，用于命令行构建)  
+or
+- [STM32CubeCLT](https://www.st.com/en/development-tools/stm32cubeclt.html#get-software)(环境所需工具链都有)  
+- [OpenOCD](https://github.com/openocd-org/openocd) (🏗️已经编译好的版本)
 ---
 
 ## ⚙️ 构建与烧录
@@ -61,7 +63,6 @@ source [find interface/cmsis-dap.cfg]
 source [find target/ti_mspm0.cfg]
 # path_to_elf_file 为你的构建目录下的.elf文件 复制绝对路径
 program <path_to_elf_file> verify reset
-reset_config srst_only
 ```
 
 ---
@@ -102,5 +103,5 @@ reset_config srst_only
 ---
 
 ## 🙋‍♂️ 贡献与反馈
-
+欢迎交流 🐧：3054736043
 欢迎提交 Issue 和 PR！如需支持其他 MSPM0 系列芯片，欢迎参与共建。
