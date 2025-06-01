@@ -1,5 +1,5 @@
 # MSPM0G3507-CMAKE-GCC-Template
-
+# 教程没写完 这个是模板的 环境配置请转至[keysking的视频](https://www.bilibili.com/video/BV1pnjizYEAk/?spm_id_from=333.1387.homepage.video_card.click&vd_source=9e440f398c1d1374db8629d6beed4370)工程与STM32相似，即环境也相似，先配置好环境
 这是一个适用于 [TI MSPM0G3507 微控制器](https://www.ti.com/product/MSPM0G3507) 的嵌入式项目模板，基于 **CMake** 构建系统、**ARM GCC** 工具链，使用 **Ninja** 加速构建流程，并集成 [Probe-rs](https://probe.rs/) 实现程序烧录与调试。
 
 本模板适用于裸机（无 RTOS）开发，助力开发者快速构建高效、结构清晰的嵌入式工程。
